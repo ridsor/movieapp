@@ -6,7 +6,7 @@ export default function MovieCategory() {
       <li>
         <Link
           className="bg-one whitespace-nowrap rounded-full block font-black px-6 py-0.5 text-white transition"
-          to="/movie"
+          to="/"
         >
           <span className="text-[16px]">All</span>
         </Link>

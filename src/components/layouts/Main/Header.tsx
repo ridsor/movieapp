@@ -4,10 +4,10 @@ import subLogo from "../../../assets/img/icons/Movie brand.svg";
 export default function Header() {
   return (
     <header>
-      <div className="container max-w-full lg:max-w-[950px] px-2">
+      <div className="container max-w-full lg:max-w-[950px] px-3">
         <div className="flex items-center py-2">
           <div className="section-left">
-            <div className="logo h-14 aspect-square relative">
+            <div className="logo h-14 aspect-square relative mr-2">
               <img src={logo} alt="" className="w-full h-full" />
               <img
                 src={subLogo}
