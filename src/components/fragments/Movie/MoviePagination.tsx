@@ -5,26 +5,26 @@ type Props = {};
 
 const MoviePagination = (props: Props) => {
   return (
-    <div className="pagination flex justify-center mb-7 items-center gap-[3.3rem]">
+    <div className="pagination flex justify-center mb-7 items-center gap-[3.3rem] ">
       <button className="prevous">
         <img src={prevous} alt="" className="w-10 " />
       </button>
       <button className="px-3.5 py-1.5 bg-two text-white text-2xl font-black">
         1
       </button>
-      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white">
+      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white hover:font-black">
         2
       </button>
-      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white">
+      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white hover:font-black">
         3
       </button>
-      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white">
+      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white hover:font-black">
         4
       </button>
-      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white">
+      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white hover:font-black">
         5
       </button>
-      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white">
+      <button className="px-3.5 py-1.5 text-2xl font-light hover:bg-two hover:text-white hover:font-black">
         6
       </button>
       <button className="next">

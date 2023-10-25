@@ -27,7 +27,9 @@ const MovieItem = ({ movie, categories }: Props) => {
           className="w-full h-[250px] object-cover object-center"
         />
       </div>
-      <div className="font-bold text-lg">{movie.title}</div>
+      <div className="font-bold text-lg text-ellipsis whitespace-nowrap overflow-hidden">
+        {movie.title}
+      </div>
       <span className="category text-[13px] leading-3">{category}</span>
     </div>
   );
