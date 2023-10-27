@@ -7,3 +7,19 @@
     font-family: "Roboto", sans-serif;
   }
 }
+
+.slick-slider .slick-dots {
+  @apply absolute bottom-9 right-1/2 translate-x-1/2 !flex gap-4;
+}
+
+.slick-slider .slick-dots > li > button {
+  @apply p-2 lg:p-3 border-2 border-white rounded-full transition-all duration-500;
+}
+
+.slick-slider .slick-dots > li.slick-active > button {
+  @apply bg-white;
+}
+
+.slick-slide div > div {
+  @apply !block;
+}
