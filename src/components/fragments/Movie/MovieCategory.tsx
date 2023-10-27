@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function MovieCategory() {
+  const [searchParams] = useSearchParams();
+
   return (
     <ul className="category flex gap-2 text-[#cdcdcd] mb-3 overflow-x-auto h-fit text-lg">
       <li>
         <Link
-          className="bg-one whitespace-nowrap rounded-full block font-black px-6 py-0.5 text-white transition"
+          className={`${
+            searchParams.get("category") === null
+              ? "bg-one text-white"
+              : "hover:text-white hover:bg-one"
+          } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}
           to="/"
         >
           All
@@ -13,7 +19,11 @@ export default function MovieCategory() {
       </li>
       <li>
         <Link
-          className="hover:bg-one whitespace-nowrap rounded-full block font-black px-3 py-0.5 hover:text-white transition hover:px-6"
+          className={`${
+            searchParams.get("category") === "anime"
+              ? "bg-one text-white"
+              : "hover:text-white hover:bg-one"
+          } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}
           to="/?category=anime"
         >
           anime
@@ -21,7 +31,11 @@ export default function MovieCategory() {
       </li>
       <li>
         <Link
-          className="hover:bg-one whitespace-nowrap rounded-full block font-black px-3 py-0.5 hover:text-white transition hover:px-6"
+          className={`${
+            searchParams.get("category") === "action"
+              ? "bg-one text-white"
+              : "hover:text-white hover:bg-one"
+          } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}
           to="/?category=action"
         >
           action
@@ -29,7 +43,11 @@ export default function MovieCategory() {
       </li>
       <li>
         <Link
-          className="hover:bg-one whitespace-nowrap rounded-full block font-black px-3 py-0.5 hover:text-white transition hover:px-6"
+          className={`${
+            searchParams.get("category") === "adventure"
+              ? "bg-one text-white"
+              : "hover:text-white hover:bg-one"
+          } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}
           to="/?category=adventure"
         >
           adventure
@@ -37,7 +55,11 @@ export default function MovieCategory() {
       </li>
       <li>
         <Link
-          className="hover:bg-one whitespace-nowrap rounded-full block font-black px-3 py-0.5 hover:text-white transition hover:px-6"
+          className={`${
+            searchParams.get("category") === "science fiction"
+              ? "bg-one text-white"
+              : "hover:text-white hover:bg-one"
+          } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}
           to="/?category=science fiction"
         >
           science fiction
@@ -45,7 +67,11 @@ export default function MovieCategory() {
       </li>
       <li>
         <Link
-          className="hover:bg-one whitespace-nowrap rounded-full block font-bold px-3 py-0.5 hover:text-white transition hover:px-6"
+          className={`${
+            searchParams.get("category") === "comedy"
+              ? "bg-one text-white"
+              : "hover:text-white hover:bg-one"
+          } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}
           to="/?category=comedy"
         >
           comedy

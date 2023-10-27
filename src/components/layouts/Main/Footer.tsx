@@ -10,8 +10,8 @@ const Footer = () => {
   return (
     <footer className="bg-black">
       <div className="container lg:max-w-[900px] px-3">
-        <article className="flex pt-5 text-white font-light border-b border-[#d4d4d4] pb-3">
-          <div className="w-full lg:w-1/2">
+        <article className="flex pt-5 text-white font-light border-b border-[#d4d4d4] pb-3 flex-wrap ">
+          <div className="w-full lg:w-1/2 mb-5 lg:mb-0">
             <div className="logo w-14 relative">
               <img src={logo} alt="" className="w-full h-full" />
             </div>
@@ -23,8 +23,8 @@ const Footer = () => {
             </p>
           </div>
           <div className="w-full lg:w-1/2">
-            <div className="flex pt-1">
-              <ul className="text-lg flex flex-col gap-y-1 w-40">
+            <div className="flex flex-wrap justify-around lg:justify-normal pt-1 ">
+              <ul className="text-lg flex flex-col gap-y-1 w-40 mb-5 lg:mb-0">
                 <li>
                   <Link to="/">Tentang kami</Link>
                 </li>
@@ -42,7 +42,7 @@ const Footer = () => {
                 </li>
               </ul>
               <div>
-                <div className="download mb-1">
+                <div className="download mb-1 flex-1">
                   <h3 className="font-medium text-lg leading-6">Download</h3>
                   <div className="flex items-center">
                     <Link to="/" className="block playstore w-[130px]">

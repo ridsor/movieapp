@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header>
       <div className="container max-w-full lg:max-w-[900px] px-3">
-        <div className="flex items-center py-2.5">
+        <div className="flex items-center py-2">
           <div className="section-left">
             <div className="logo w-14 relative mr-2">
               <img src={logo} alt="" className="w-full h-full" />
