@@ -3,17 +3,23 @@ import MovieCategory from "../../components/fragments/Movie/MovieCategory";
 import MovieList from "../../components/fragments/Movie/MovieList";
 import { useAppDispatch, useAppSelector } from "../../config/redux/hooks";
 import { getMovies, movieSelectors } from "./movieSlice";
-import { useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useCallback, useState } from "react";
 import {
   getMoviezCategory,
   movieCategorySelectors,
 } from "./movieCategorySlice";
 import MoviePagination from "../../components/fragments/Movie/MoviePagination";
-import Slider from "../../components/fragments/SliderCustom";
 
 // Import css files
 import "slick-carousel/slick/slick.css";
 import { useSearchParams } from "react-router-dom";
+import MovieSlider from "../../components/fragments/Movie/MovieSlider";
+import apiAxios from "../../lib/api";
+
+interface MoviePopuler {
+  id: number;
+  img: string;
+}
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -21,9 +27,10 @@ const Home = () => {
   const movieCategories = useAppSelector(movieCategorySelectors.selectAll);
   const movieCategory = useAppSelector((state) => state.movie.category);
   const moviePage = useAppSelector((state) => state.movie.page);
-  const movieTotalPages = useAppSelector((state) => state.movie.total_pages);
 
   const [searchParams] = useSearchParams();
+
+  const [moviesPopuler, setMoviesPopuler] = useState<MoviePopuler[]>([]);
 
   const sliderMovieSettings = useMemo(
     () => ({
@@ -59,8 +66,6 @@ const Home = () => {
         id = findCategory?.id as number;
       }
 
-      console.log(category);
-
       return id;
     },
     [movieCategories]
@@ -80,49 +85,30 @@ const Home = () => {
   }, [searchParams, movieCategories]);
 
   useEffect(() => {
-    // slick
-    const dots: any = document.querySelectorAll(".slick-dots>li>button");
-    for (const dot of dots) {
-      dot.innerText = "";
-    }
-  }, []);
+    const loadMoviePopuler = async () => {
+      const movies = await apiAxios
+        .get("/discover/movie?sort_by=popularity.desc")
+        .then((res) => res.data.results);
 
-  console.log(movieCategories);
+      const moviesFilter = movies.map((item: any) => {
+        return { id: item.id, img: item.backdrop_path };
+      });
+
+      return [moviesFilter[0], moviesFilter[1], moviesFilter[2]];
+    };
+
+    loadMoviePopuler().then((res) => setMoviesPopuler(res));
+  }, []);
 
   return (
     <Main>
       <main>
         <section>
           <div className="container max-w-full">
-            <Slider settings={sliderMovieSettings}>
-              <div className="bg-red-500">
-                <div className="h-[400px] w-full">
-                  <img
-                    src="https://image.tmdb.org/t/p/original/rMvPXy8PUjj1o8o1pzgQbdNCsvj.jpg"
-                    className="w-full h-full object-cover object-center"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="h-[400px] w-full">
-                  <img
-                    src="https://image.tmdb.org/t/p/original/k0VC5O8PrrJRqqDDbHDiDo8qAE0.jpg"
-                    className="w-full h-full object-cover object-center"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="h-[400px] w-full">
-                  <img
-                    src="https://image.tmdb.org/t/p/original/dZbLqRjjiiNCpTYzhzL2NMvz4J0.jpg"
-                    className="w-full h-full object-cover object-center"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </Slider>
+            <MovieSlider
+              settings={sliderMovieSettings}
+              movies={moviesPopuler}
+            />
           </div>
         </section>
         <section>

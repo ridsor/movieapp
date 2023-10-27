@@ -33,7 +33,7 @@ export const getMovies = createAsyncThunk(
     destination?: number;
     category?: number | string;
   }) => {
-    const { results, page, total_pages, total_results } = await apiAxios
+    const { results, page } = await apiAxios
       .get(`/discover/movie?page=${destination}&with_genres=${category}`)
       .then((res) => res.data)
       .catch((err) => console.error(err));
