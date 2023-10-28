@@ -17,6 +17,7 @@ interface Movie {
 interface State {
   page: number;
   category: string | number;
+  search: string
   loading?: boolean;
 }
 
@@ -29,14 +30,28 @@ export const getMovies = createAsyncThunk(
   async ({
     destination = 1,
     category = "",
+    search=""
   }: {
     destination?: number;
     category?: number | string;
+    search?: string;
   }) => {
-    const { results, page } = await apiAxios
-      .get(`/discover/movie?page=${destination}&with_genres=${category}`)
-      .then((res) => res.data)
-      .catch((err) => console.error(err));
+    let results: [];
+    let page: number;
+
+    if(search) {
+      ({ results, page } = await apiAxios
+        .get(`search/movie?query=${search}&page=${destination}`)
+        .then((res) => res.data)
+        .catch((err) => console.error(err)));
+
+    } else {
+      ({ results, page } = await apiAxios
+        .get(`/discover/movie?page=${destination}&with_genres=${category}`)
+        .then((res) => res.data)
+        .catch((err) => console.error(err)));
+    }
+
 
     return {
       results: results.map((item: any) => ({
@@ -47,6 +62,7 @@ export const getMovies = createAsyncThunk(
       })),
       page,
       category,
+      search
     };
   }
 );
@@ -56,6 +72,7 @@ const movieSlice = createSlice({
   initialState: movieEntity.getInitialState<State>({
     page: 1,
     category: "",
+    search: "",
     loading: true,
   }),
   reducers: {},
@@ -67,10 +84,11 @@ const movieSlice = createSlice({
       .addCase(
         getMovies.fulfilled,
         (state, action: PayloadAction<{ results: Movie[] } & State>) => {
-          const { results, page, category } = action.payload;
+          const { results, page, category, search } = action.payload;
           movieEntity.setAll(state, results);
           state.page = page;
           state.category = category;
+          state.search = search
           state.loading = false;
         }
       );
