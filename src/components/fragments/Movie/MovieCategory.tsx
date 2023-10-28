@@ -1,14 +1,27 @@
+import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-export default function MovieCategory() {
-  const [searchParams] = useSearchParams();
+interface Props {
+  search: string | undefined;
+}
+
+export default function MovieCategory(props: Props) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (props.search) {
+      setSearchParams({ category: "" });
+    }
+    console.log("tes");
+  }, [props.search]);
 
   return (
     <ul className="category flex gap-2 text-[#cdcdcd] mb-3 overflow-x-auto h-fit text-lg">
       <li>
         <Link
           className={`${
-            searchParams.get("category") === null
+            searchParams.get("category") === null ||
+            searchParams.get("category") === ""
               ? "bg-one text-white"
               : "hover:text-white hover:bg-one"
           } whitespace-nowrap rounded-full block font-black px-6 py-0.5 transition`}

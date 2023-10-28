@@ -21,12 +21,18 @@ interface MoviePopuler {
   img: string;
 }
 
+interface MovieCategory {
+  id: number;
+  name: string;
+}
+
 const Home = () => {
   const dispatch = useAppDispatch();
   const movies = useAppSelector(movieSelectors.selectAll);
   const movieCategories = useAppSelector(movieCategorySelectors.selectAll);
   const movieCategory = useAppSelector((state) => state.movie.category);
   const moviePage = useAppSelector((state) => state.movie.page);
+  const movieSearch = useAppSelector((state) => state.movie.search);
 
   const [searchParams] = useSearchParams();
 
@@ -45,20 +51,20 @@ const Home = () => {
   );
 
   const onClickPagination = useCallback(
-    (destination: number) => {
-      dispatch(getMovies({ destination, category: movieCategory }));
+    (destination: number, category: string | number, search: string) => {
+      dispatch(getMovies({ destination, category, search }));
     },
-    [movieCategory]
+    []
   );
 
   const getMovieCategoryId = useCallback(
-    (category: string) => {
+    (category: string, categories: MovieCategory[]) => {
       category = category === "anime" ? (category = "animation") : category;
 
       let id: number | string = "";
 
       if (category) {
-        const findCategory = movieCategories.find(
+        const findCategory = categories.find(
           (item) =>
             item.name.toLocaleLowerCase() === category.toLocaleLowerCase()
         );
@@ -68,7 +74,7 @@ const Home = () => {
 
       return id;
     },
-    [movieCategories]
+    []
   );
 
   useMemo(() => {
@@ -78,7 +84,7 @@ const Home = () => {
   useEffect(() => {
     if (movieCategories.length > 0) {
       let category = searchParams.get("category") as string;
-      const categoryId = getMovieCategoryId(category);
+      const categoryId = getMovieCategoryId(category, movieCategories);
 
       dispatch(getMovies({ category: categoryId }));
     }
@@ -116,9 +122,14 @@ const Home = () => {
             <h2 className="text-2xl font-black text-[#8C8989] my-5">
               Browse by category
             </h2>
-            <MovieCategory />
+            <MovieCategory search={movieSearch} />
             <MovieList movies={movies} categories={movieCategories} />
-            <MoviePagination page={moviePage} handleClick={onClickPagination} />
+            <MoviePagination
+              page={moviePage}
+              category={movieCategory}
+              search={movieSearch}
+              handleClick={onClickPagination}
+            />
           </div>
         </section>
       </main>

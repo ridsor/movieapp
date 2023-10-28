@@ -17,12 +17,10 @@ const MovieSlider = (props: Props) => {
   var dots: any = document.querySelectorAll(".slick-dots>li>button");
   useEffect(() => {
     if (dots.length > 0) {
+      if (dots[0].innerText === "") return;
       for (const dot of dots) {
-        if (dot.innerText === "") break;
         dot.innerText = "";
       }
-
-      dots = undefined;
     }
   }, [dots]);
 
