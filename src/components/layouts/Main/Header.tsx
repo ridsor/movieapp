@@ -28,7 +28,7 @@ export default function Header() {
             </div>
           </div>
           <div className="section-right flex justify-center w-full">
-            <div className="search w-full max-w-xs">
+            <div className="search w-full max-w-md">
               <input
                 type="text"
                 placeholder="search movie"

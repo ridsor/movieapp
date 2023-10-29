@@ -118,7 +118,7 @@ const Home = () => {
           </div>
         </section>
         <section>
-          <div className="container px-3 lg:max-w-[880px]">
+          <div className="container px-3 lg:max-w-[885px]">
             <h2 className="text-2xl font-black text-[#8C8989] my-5">
               Browse by category
             </h2>
