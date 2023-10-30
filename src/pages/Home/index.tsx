@@ -15,6 +15,7 @@ import "slick-carousel/slick/slick.css";
 import { useSearchParams } from "react-router-dom";
 import MovieSlider from "../../components/fragments/Movie/MovieSlider";
 import apiAxios from "../../lib/api";
+import MovieLoading from "../../components/fragments/Movie/MovieLoading";
 
 interface MoviePopuler {
   id: number;
@@ -33,6 +34,7 @@ const Home = () => {
   const movieCategory = useAppSelector((state) => state.movie.category);
   const moviePage = useAppSelector((state) => state.movie.page);
   const movieSearch = useAppSelector((state) => state.movie.search);
+  const movieLoading = useAppSelector((state) => state.movie.loading);
 
   const [searchParams] = useSearchParams();
 
@@ -79,18 +81,8 @@ const Home = () => {
 
   useMemo(() => {
     dispatch(getMoviezCategory());
-  }, []);
 
-  useEffect(() => {
-    if (movieCategories.length > 0) {
-      let category = searchParams.get("category") as string;
-      const categoryId = getMovieCategoryId(category, movieCategories);
-
-      dispatch(getMovies({ category: categoryId }));
-    }
-  }, [searchParams, movieCategories]);
-
-  useEffect(() => {
+    // slider
     const loadMoviePopuler = async () => {
       const movies = await apiAxios
         .get("/discover/movie?sort_by=popularity.desc")
@@ -105,6 +97,15 @@ const Home = () => {
 
     loadMoviePopuler().then((res) => setMoviesPopuler(res));
   }, []);
+
+  useEffect(() => {
+    if (movieCategories.length > 0) {
+      let category = searchParams.get("category") as string;
+      const categoryId = getMovieCategoryId(category, movieCategories);
+
+      dispatch(getMovies({ category: categoryId }));
+    }
+  }, [searchParams, movieCategories]);
 
   return (
     <Main>
@@ -123,7 +124,11 @@ const Home = () => {
               Browse by category
             </h2>
             <MovieCategory search={movieSearch} />
-            <MovieList movies={movies} categories={movieCategories} />
+            {movieLoading ? (
+              <MovieLoading />
+            ) : (
+              <MovieList movies={movies} categories={movieCategories} />
+            )}
             <MoviePagination
               page={moviePage}
               category={movieCategory}
