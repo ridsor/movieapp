@@ -17,7 +17,11 @@ const MovieSlider = (props: Props) => {
   var dots: any = document.querySelectorAll(".slick-dots>li>button");
   useEffect(() => {
     if (dots.length > 0) {
-      if (dots[0].innerText === "") return;
+      if (dots[0].innerText === "") {
+        dots = undefined;
+        return;
+      }
+
       for (const dot of dots) {
         dot.innerText = "";
       }
@@ -25,11 +29,19 @@ const MovieSlider = (props: Props) => {
   }, [dots]);
 
   return (
-    <Slider {...props.settings} className="overflow-hidden block">
-      {props.movies.map((movie) => (
-        <MovieItemSlider img={movie.img} key={movie.id} />
-      ))}
-    </Slider>
+    <>
+      {props.movies.length < 1 ? (
+        <div className="animate-pulse">
+          <div className="h-[400px] w-full bg-gray-200"></div>
+        </div>
+      ) : (
+        <Slider {...props.settings} className="overflow-hidden block">
+          {props.movies.map((movie) => (
+            <MovieItemSlider img={movie.img} key={movie.id} />
+          ))}
+        </Slider>
+      )}
+    </>
   );
 };
 

@@ -18,8 +18,6 @@ type Movie = {
 };
 
 const MovieItem = ({ movie, categories }: Props) => {
-  let category = categories.find((x) => x.id === movie.genre_ids[0])?.name;
-
   return (
     <div className="movie-item flex flex-col">
       <div className="movie-img w-full h-fit bg-gray-200 rounded-md mb-1 overflow-hidden">
@@ -29,10 +27,10 @@ const MovieItem = ({ movie, categories }: Props) => {
           className="w-full h-[250px] object-cover object-center"
         />
       </div>
-      <div className="font-bold text-lg text-ellipsis leading-5 mt-1 h-5 whitespace-nowrap w-full overflow-hidden">
+      <div className="font-bold text-lg leading-5 mt-1 h-10 text-ellipsis w-full overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
         {movie.title}
       </div>
-      <span className="category text-[13px] leading-4 h-[32px]">
+      <span className="category text-[13px] leading-4 min-h-[32px] h-fit">
         {movie.genre_ids.map((item, i) => {
           for (const category of categories) {
             if (category.id === item) {

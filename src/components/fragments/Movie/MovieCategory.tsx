@@ -12,7 +12,6 @@ export default function MovieCategory(props: Props) {
     if (props.search) {
       setSearchParams({ category: "" });
     }
-    console.log("tes");
   }, [props.search]);
 
   return (
