@@ -16,6 +16,7 @@ import { useSearchParams } from "react-router-dom";
 import MovieSlider from "../../components/fragments/Movie/MovieSlider";
 import apiAxios from "../../lib/api";
 import MovieLoading from "../../components/fragments/Movie/MovieLoading";
+import MovieNotFound from "../../components/fragments/Movie/MovieNotFound";
 
 interface MoviePopuler {
   id: number;
@@ -56,7 +57,7 @@ const Home = () => {
     (destination: number, category: string | number, search: string) => {
       dispatch(getMovies({ destination, category, search }));
     },
-    []
+    [dispatch]
   );
 
   const getMovieCategoryId = useCallback(
@@ -88,24 +89,26 @@ const Home = () => {
         .get("/discover/movie?sort_by=popularity.desc")
         .then((res) => res.data.results);
 
-      const moviesFilter = movies.map((item: any) => {
-        return { id: item.id, img: item.backdrop_path };
-      });
+      const moviesFilter = movies.map(
+        (item: { id: number; backdrop_path: string }) => {
+          return { id: item.id, img: item.backdrop_path };
+        }
+      );
 
       return [moviesFilter[0], moviesFilter[1], moviesFilter[2]];
     };
 
     loadMoviePopuler().then((res) => setMoviesPopuler(res));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (movieCategories.length > 0) {
-      let category = searchParams.get("category") as string;
+      const category = searchParams.get("category") as string;
       const categoryId = getMovieCategoryId(category, movieCategories);
 
       dispatch(getMovies({ category: categoryId }));
     }
-  }, [searchParams, movieCategories]);
+  }, [searchParams, movieCategories, dispatch, getMovieCategoryId]);
 
   return (
     <Main>
@@ -126,8 +129,10 @@ const Home = () => {
             <MovieCategory search={movieSearch} />
             {movieLoading ? (
               <MovieLoading />
-            ) : (
+            ) : movies.length > 0 ? (
               <MovieList movies={movies} categories={movieCategories} />
+            ) : (
+              <MovieNotFound />
             )}
             <MoviePagination
               page={moviePage}
