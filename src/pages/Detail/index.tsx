@@ -1,18 +1,31 @@
 import Main from "../../components/layouts/Main";
 import { useParams } from "react-router-dom";
 import yellowStar from "../../assets/img/icons/Star 4.svg";
-import whiteStar from "../../assets/img/icons/Star 4.svg";
+import whiteStar from "../../assets/img/icons/Star 5.svg";
+import { useState } from "react";
+
+interface MovieDetail {
+  id: number;
+  original_title: string;
+  backdrop_path: string;
+  poster_path: string;
+  overview: string;
+  release_date: string;
+}
 
 const Detail = () => {
-  const { movie } = useParams();
+  const { movie_id } = useParams();
+  const [movie, setMovie] = useState();
 
   return (
     <Main>
       <main>
-        <section className="text-white min-h-[380px] w-full bg-[rgba(0,0,0,.6)] bg-blend-multiply bg-[url('https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg')] bg-cover bg-center bg-fixed">
+        <section
+          className={`text-white min-h-[380px] w-full bg-[rgba(0,0,0,.6)] bg-blend-multiply bg-[url('https://image.tmdb.org/t/p/original${"img"}')] bg-cover bg-center bg-fixed`}
+        >
           <div className="container max-w-full lg:max-w-[885px] px-3">
             <div className="w-full max-w-[33rem] py-12">
-              <h1 className="title font-black text-4xl">SAINT SEIYA</h1>
+              <h1 className="title font-black text-4xl">{}</h1>
               <div className="flex gap-[1.1rem] mb-4 items-center">
                 <div className="rating flex justify-between gap-x-1">
                   <div className="star">
@@ -28,7 +41,7 @@ const Detail = () => {
                     <img src={yellowStar} className="w-6" alt="" />
                   </div>
                   <div className="star">
-                    <img src={yellowStar} className="w-6" alt="" />
+                    <img src={whiteStar} className="w-6" alt="" />
                   </div>
                 </div>
                 <div className="reviews text-[#f4f4f4] text-lg font-medium">
