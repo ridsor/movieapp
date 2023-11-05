@@ -23,7 +23,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="w-full lg:w-1/2">
-            <div className="flex flex-wrap justify-around lg:justify-normal pt-1 ">
+            <div className="flex flex-wrap  lg:justify-normal pt-1 ">
               <ul className="text-lg flex flex-col gap-y-1 w-40 mb-5 lg:mb-0">
                 <li>
                   <Link to="/">Tentang kami</Link>
