@@ -14,8 +14,8 @@ interface Movie {
 
 const MovieSlider = (props: Props) => {
   // slick
-  var dots: any = document.querySelectorAll(".slick-dots>li>button");
   useEffect(() => {
+    var dots: any = document.querySelectorAll(".slick-dots>li>button");
     if (dots.length > 0) {
       if (dots[0].innerText === "") {
         dots = undefined;
@@ -26,7 +26,7 @@ const MovieSlider = (props: Props) => {
         dot.innerText = "";
       }
     }
-  }, [dots]);
+  });
 
   return (
     <>

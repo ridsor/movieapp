@@ -20,7 +20,7 @@ type Movie = {
 
 const MovieItem = ({ movie, categories }: Props) => {
   return (
-    <Link to={`/${movie.id}`}>
+    <Link to={`/movie/${movie.id}`} className="hover:scale-95 transition">
       <div className="movie-item flex flex-col">
         <div className="movie-img w-full h-fit bg-gray-200 rounded-md mb-1 overflow-hidden">
           <img
