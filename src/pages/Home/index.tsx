@@ -4,10 +4,7 @@ import MovieList from "../../components/fragments/Movie/MovieList";
 import { useAppDispatch, useAppSelector } from "../../config/redux/hooks";
 import { getMovies, movieSelectors } from "./movieSlice";
 import { useEffect, useMemo, useCallback, useState } from "react";
-import {
-  getMoviezCategory,
-  movieCategorySelectors,
-} from "./movieCategorySlice";
+import { getMovieCategory, movieCategorySelectors } from "./movieCategorySlice";
 import MoviePagination from "../../components/fragments/Movie/MoviePagination";
 
 // Import css files
@@ -54,8 +51,8 @@ const Home = () => {
   );
 
   const onClickPagination = useCallback(
-    (destination: number, category: string | number, search: string) => {
-      dispatch(getMovies({ destination, category, search }));
+    (destination: number, category: string | number) => {
+      dispatch(getMovies({ destination, category }));
     },
     [dispatch]
   );
@@ -81,7 +78,7 @@ const Home = () => {
   );
 
   useMemo(() => {
-    dispatch(getMoviezCategory());
+    dispatch(getMovieCategory());
 
     // slider
     const loadMoviePopuler = async () => {
@@ -126,7 +123,7 @@ const Home = () => {
             <h2 className="text-2xl font-black text-[#8C8989] my-5">
               Browse by category
             </h2>
-            <MovieCategory search={movieSearch} />
+            <MovieCategory />
             {movieLoading ? (
               <MovieLoading />
             ) : movies.length > 0 ? (
@@ -137,7 +134,6 @@ const Home = () => {
             <MoviePagination
               page={moviePage}
               category={movieCategory}
-              search={movieSearch}
               handleClick={onClickPagination}
             />
           </div>

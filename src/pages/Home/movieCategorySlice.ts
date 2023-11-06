@@ -7,7 +7,7 @@ interface MovieCategory {
 	name: string
 }
 
-export const getMoviezCategory = createAsyncThunk('getMovieCategory',async () => {
+export const getMovieCategory = createAsyncThunk('getMovieCategory',async () => {
 	const res = await apiAxios.get('/genre/movie/list?language=en').then(res => res.data)
 	return res.genres
 })
@@ -21,7 +21,7 @@ const movieCategorySlice = createSlice({
 	initialState: movieCategoryEntity.getInitialState(),
 	reducers: {},
 	extraReducers(builder) {
-		builder.addCase(getMoviezCategory.fulfilled,(state, action: PayloadAction<MovieCategory[]>) => {
+		builder.addCase(getMovieCategory.fulfilled,(state, action: PayloadAction<MovieCategory[]>) => {
 			movieCategoryEntity.setAll(state, action.payload)
 		})
 	},

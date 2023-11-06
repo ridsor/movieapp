@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import MovieCharacters from "./components/fragments/MovieDetail/MovieCharacters";
 import MovieOverview from "./components/fragments/MovieDetail/MovieOverview";
 import MovieReviews from "./components/fragments/MovieDetail/MovieReviews";
+import Results from "./pages/Results";
 
 const App = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const App = createBrowserRouter(
         <Route path="characters" element={<MovieCharacters />} />
         <Route path="reviews" element={<MovieReviews />} />
       </Route>
+      <Route path="results" element={<Results />} />
       <Route path="*" element={<h1>halaman tidak ditemukan</h1>} />
     </Route>
   )
