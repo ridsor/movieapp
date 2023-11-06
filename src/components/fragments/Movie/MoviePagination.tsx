@@ -4,11 +4,11 @@ import next from "../../../assets/img/icons/Arrow 1.svg";
 interface Props {
   page: number;
   category: string | number;
-  search: string;
+  search?: string;
   handleClick: (
     destination: number,
     category: string | number,
-    search: string
+    search?: string
   ) => void;
 }
 

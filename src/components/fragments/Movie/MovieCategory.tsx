@@ -1,18 +1,8 @@
 import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-interface Props {
-  search: string | undefined;
-}
-
-export default function MovieCategory(props: Props) {
+export default function MovieCategory() {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    if (props.search) {
-      setSearchParams({ category: "" });
-    }
-  }, [props.search]);
 
   return (
     <ul className="category flex gap-2 text-[#cdcdcd] mb-3 overflow-x-auto h-fit text-lg">
