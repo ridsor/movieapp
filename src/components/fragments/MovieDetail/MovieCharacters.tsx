@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import MovieCharactersLoading from "./MovieCharactersLoading";
+import MovieNotFound from "../Movie/MovieNotFound";
 import MoviewCharacterItem from "./MoviewCharacterItem";
 
 interface Character {
@@ -24,7 +24,7 @@ const MovieCharacters = () => {
           ))}
         </div>
       ) : (
-        <MovieCharactersLoading />
+        <MovieNotFound />
       )}
     </div>
   );
