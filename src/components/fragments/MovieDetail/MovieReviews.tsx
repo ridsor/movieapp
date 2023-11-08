@@ -1,4 +1,5 @@
 import { useOutletContext } from "react-router-dom";
+import MovieNotFound from "../Movie/MovieNotFound";
 import MovieReviewItem from "./MovieReviewItem";
 
 interface Review {
@@ -21,9 +22,13 @@ const MovieReviews = () => {
         <span className="bg-white pr-3.5">Reviews</span>
       </h2>
       <div className="reviews flex gap-x-5 gap-y-8 flex-col">
-        {reviews.map((review) => (
-          <MovieReviewItem review={review} key={review.id} />
-        ))}
+        {reviews.length > 0 ? (
+          reviews.map((review) => (
+            <MovieReviewItem review={review} key={review.id} />
+          ))
+        ) : (
+          <MovieNotFound />
+        )}
       </div>
     </div>
   );
