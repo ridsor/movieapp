@@ -31,7 +31,6 @@ const Home = () => {
   const movieCategories = useAppSelector(movieCategorySelectors.selectAll);
   const movieCategory = useAppSelector((state) => state.movie.category);
   const moviePage = useAppSelector((state) => state.movie.page);
-  const movieSearch = useAppSelector((state) => state.movie.search);
   const movieLoading = useAppSelector((state) => state.movie.loading);
 
   const [searchParams] = useSearchParams();
