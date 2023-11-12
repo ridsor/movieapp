@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 export default function MovieCategory() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   return (
     <ul className="category flex gap-2 text-[#cdcdcd] mb-3 overflow-x-auto h-fit text-lg">
