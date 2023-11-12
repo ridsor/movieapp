@@ -132,20 +132,33 @@ const Detail = () => {
 
       setCharacters(characters);
 
-      const reviews = res.reviews.results.map((x: any) => ({
-        id: x.id,
-        author: x.author,
-        username: x.author_details.username,
-        avartar_path: x.author_details.avatar_path,
-        rating: x.author_details.rating,
-        content: x.content,
-        date: x.updated_at,
-        url: x.url,
-      }));
+      const reviews = res.reviews.results.map(
+        (x: {
+          id: number;
+          author: string;
+          author_details: {
+            username: string;
+            rating: number;
+            avatar_path: string;
+          };
+          content: string;
+          updated_at: string;
+          url: string;
+        }) => ({
+          id: x.id,
+          author: x.author,
+          username: x.author_details.username,
+          avartar_path: x.author_details.avatar_path,
+          rating: x.author_details.rating,
+          content: x.content,
+          date: x.updated_at,
+          url: x.url,
+        })
+      );
 
       setReviews(reviews);
     });
-  }, []);
+  }, [movie_id]);
 
   return (
     <Main>
@@ -156,15 +169,14 @@ const Detail = () => {
               movie?.backdrop_path || ""
             }')`,
           }}
-          className={`text-white h-[380px] overflow-auto w-full bg-[rgba(0,0,0,.6)] bg-blend-multiply bg-cover bg-center bg-fixed`}
-        >
+          className={`text-white h-[600px] md:h-[380px] overflow-auto w-full bg-[rgba(0,0,0,.6)] bg-blend-multiply bg-cover bg-center bg-fixed`}>
           <div className="container max-w-full lg:max-w-[885px] px-3">
             <div className="w-full max-w-[33rem] py-12">
-              <h1 className="title font-black text-4xl">
+              <h1 className="text-4xl font-black title">
                 {movie.original_title}
               </h1>
               <div className="flex gap-[1.1rem] mb-4 items-center">
-                <div className="rating flex justify-between gap-x-1">
+                <div className="flex justify-between rating gap-x-1">
                   <div className="star">
                     <img src={yellowStar} className="w-6" alt="" />
                   </div>
@@ -188,8 +200,8 @@ const Detail = () => {
               <p className="leading-[1.4rem] text-lg mb-7 font-medium">
                 {movie.overview}
               </p>
-              <div className="flex gap-x-7 gap-y-3 flex-wrap">
-                <button className="font-black text-2xl bg-two rounded-md px-7 py-3">
+              <div className="flex flex-wrap gap-x-7 gap-y-3">
+                <button className="py-3 text-2xl font-black rounded-md bg-two px-7">
                   Watch Trailer
                 </button>
                 <button className="font-black text-2xl bg-transparent border-2 border-[#c4c4c4] rounded-md px-7 py-3">
@@ -201,16 +213,15 @@ const Detail = () => {
         </section>
         <section>
           <div className="container px-3 lg:max-w-[900px] mt-2.5">
-            <ul className="flex gap-5 mb-10 w-full overflow-auto">
+            <ul className="flex w-full gap-5 mb-10 overflow-auto">
               <li>
                 <Link
                   to={`/movie/${movie.id}`}
                   className={`${
-                    location.pathname === `/${movie.id}`
+                    location.pathname === `/movie/${movie.id}`
                       ? "bg-one text-white font-black"
                       : ""
-                  } text-lg px-5 py-0.5 rounded-full transition`}
-                >
+                  } text-lg px-5 py-0.5 rounded-full transition`}>
                   Overview
                 </Link>
               </li>
@@ -221,8 +232,7 @@ const Detail = () => {
                     location.pathname === `/movie/${movie.id}/characters`
                       ? "bg-one text-white font-black"
                       : ""
-                  } text-lg px-5 py-0.5 rounded-full transition`}
-                >
+                  } text-lg px-5 py-0.5 rounded-full transition`}>
                   Characters
                 </Link>
               </li>
@@ -230,11 +240,10 @@ const Detail = () => {
                 <Link
                   to={`/movie/${movie.id}/reviews`}
                   className={`${
-                    location.pathname === `/${movie.id}/reviews`
+                    location.pathname === `/movie/${movie.id}/reviews`
                       ? "bg-one text-white font-black"
                       : ""
-                  } text-lg px-5 py-0.5 rounded-full transition`}
-                >
+                  } text-lg px-5 py-0.5 rounded-full transition`}>
                   Review
                 </Link>
               </li>
