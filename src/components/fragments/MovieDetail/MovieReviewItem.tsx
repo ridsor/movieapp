@@ -3,6 +3,7 @@ import star from "../../../assets/img/icons/Star 4.svg";
 
 type Props = {
   review: Review;
+  dateConvert: (e: string) => string;
 };
 
 interface Review {
@@ -39,7 +40,7 @@ const MovieReviewItem = (props: Props) => {
             </span>
           </div>
           <div className="date text-base translate-y-[.5px]">
-            {props.review.date}
+            {props.dateConvert(props.review.date)}
           </div>
         </div>
         <p className="text-xl">{props.review.content}</p>
