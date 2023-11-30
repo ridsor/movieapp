@@ -169,7 +169,8 @@ const Detail = () => {
               movie?.backdrop_path || ""
             }')`,
           }}
-          className={`text-white h-[600px] md:h-[380px] overflow-auto w-full bg-[rgba(0,0,0,.6)] bg-blend-multiply bg-cover bg-center bg-fixed`}>
+          className={`text-white h-fit max-h-[700px] md:h-fit md:max-h-[500px] overflow-auto w-full bg-[rgba(0,0,0,.6)] bg-blend-multiply bg-cover bg-center bg-fixed`}
+        >
           <div className="container max-w-full lg:max-w-[885px] px-3">
             <div className="w-full max-w-[33rem] py-12">
               <h1 className="text-4xl font-black title">
@@ -221,7 +222,8 @@ const Detail = () => {
                     location.pathname === `/movie/${movie.id}`
                       ? "bg-one text-white font-black"
                       : ""
-                  } text-lg px-5 py-0.5 rounded-full transition`}>
+                  } text-lg px-5 py-0.5 rounded-full transition`}
+                >
                   Overview
                 </Link>
               </li>
@@ -232,7 +234,8 @@ const Detail = () => {
                     location.pathname === `/movie/${movie.id}/characters`
                       ? "bg-one text-white font-black"
                       : ""
-                  } text-lg px-5 py-0.5 rounded-full transition`}>
+                  } text-lg px-5 py-0.5 rounded-full transition`}
+                >
                   Characters
                 </Link>
               </li>
@@ -243,7 +246,8 @@ const Detail = () => {
                     location.pathname === `/movie/${movie.id}/reviews`
                       ? "bg-one text-white font-black"
                       : ""
-                  } text-lg px-5 py-0.5 rounded-full transition`}>
+                  } text-lg px-5 py-0.5 rounded-full transition`}
+                >
                   Review
                 </Link>
               </li>
